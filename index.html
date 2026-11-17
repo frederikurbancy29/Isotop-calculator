@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kostenloser lokaler Rechner für geochemische Isotopenaufgaben mit Projektverwaltung und transparenten Rechenwegen.">
+  <meta name="theme-color" content="#18352f">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file: 'unsafe-inline'; img-src 'self' file: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Geochemical Isotope Calculator</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="engine.js" defer></script>
+  <script src="advanced.js" defer></script>
+  <script src="parser.js" defer></script>
+  <script src="storage.js" defer></script>
+  <script src="exports.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip">Zum Arbeitsbereich</a>
+  <div id="app"><div class="loading">Geochemical Isotope Calculator wird geöffnet …</div></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal"><div id="modal-content"></div></dialog>
+  <div id="print-report"></div>
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+  <noscript>Diese lokale Anwendung benötigt JavaScript. Bitte im Browser aktivieren.</noscript>
+</body>
+</html>

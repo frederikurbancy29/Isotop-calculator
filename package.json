@@ -1,0 +1,9 @@
+{
+  "name": "geochemical-isotope-calculator",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Offline geochemical isotope calculator. No dependencies, no API, no build step.",
+  "scripts": { "start": "node server.mjs", "test": "node --test tests/*.test.cjs", "build": "node scripts/build.mjs" },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

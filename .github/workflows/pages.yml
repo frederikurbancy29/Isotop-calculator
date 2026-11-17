@@ -1,0 +1,63 @@
+name: Test and publish calculator
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish_site:
+        description: 'Publish after Pages has been enabled in repository settings'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: calculator-pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Verify calculations and prepare website
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Test scientific calculations, parser and exports
+        run: node --test tests/*.test.cjs
+      - name: Prepare static website
+        run: node scripts/build.mjs
+      - name: Upload website
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    name: Publish to GitHub Pages
+    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && (github.event.repository.private == false || inputs.publish_site == true)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4

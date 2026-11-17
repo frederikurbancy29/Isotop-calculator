@@ -1,0 +1,44 @@
+GEOCHEMICAL ISOTOPE CALCULATOR
+Kostenlos, lokal, ohne Python oder API.
+
+START
+1. Das ZIP vollständig entpacken.
+2. Den Ordner geochemical-isotope-calculator öffnen.
+3. index.html per Doppelklick im Browser öffnen.
+
+Keine Installation und keine Internetverbindung erforderlich.
+Alle Dateien im Ordner zusammenlassen.
+
+ERSTE SCHRITTE
+„Isotopen · Übungsatelier“ enthält acht Grundbeispiele.
+„Assignment 3 · Diagenese“ enthält fünf ergänzende Aufgaben.
+Für eigene Aufgaben: „Neues Projekt“ und dann „Neue Aufgabe“.
+Zahlen eingeben, Einheiten prüfen und auf „Berechnen“ klicken.
+Die Auswahl „Parameter erkennen“ schlägt Werte aus Textaufgaben vor.
+Vorschläge vor dem Rechnen immer prüfen.
+
+SICHERN UND EXPORTIEREN
+Die App speichert automatisch im Browser.
+„Alles sichern“ → JSON ist deine portable Projektsicherung.
+„Projekte importieren“ lädt eine solche Sicherung als neue Kopie.
+Aufgaben und Projekte lassen sich auch als Excel oder CSV exportieren.
+Für PDF: „PDF / Drucken“ und im Druckdialog „Als PDF sichern“.
+
+WENN DER BROWSER LOKALE DATEIEN EINSCHRÄNKT
+Optional mit Node.js (ab 18) im Projektordner starten:
+    node server.mjs
+Anschließend http://127.0.0.1:8796 im Browser öffnen.
+Keine zusätzlichen Pakete nötig. Beenden mit Ctrl+C.
+Der Datei-Start und die lokale HTTP-Adresse haben getrennten Speicher.
+Zum Wechseln JSON exportieren und wieder importieren.
+
+DETAILS
+„Methoden & Anleitung“ in der App erklärt die Formeln und Konventionen.
+README.md enthält die ausführliche Anleitung.
+METHODS.md dokumentiert die wissenschaftlichen Modelle und Quellen.
+TESTS.md beschreibt die Sollwerte und durchgeführten Prüfungen.
+examples/uebungsatelier.json ist eine importierbare Beispielsicherung.
+
+Version 2.0: Formelbibliothek mit sieben Themen und 14 Modulen.
+Assignment-3-Beispiele: Wasser–Gestein-Austausch, Fluid-Szenarien und Brachiopoden-Screening.
+GitHub: https://github.com/frederikurbancy29/Isotop-calculator

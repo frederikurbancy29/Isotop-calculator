@@ -1,0 +1,716 @@
+{
+  "schema": "geochemical-isotope-calculator",
+  "schemaVersion": 1,
+  "engineVersion": "2.0.0",
+  "exportedAt": "2026-11-17T20:57:19.510Z",
+  "projects": [
+    {
+      "id": "e886d016-0014-495b-b943-44524c020e4b",
+      "name": "Assignment 3 · Diagenese",
+      "description": "Lehrdaten aus Assignment 3: Fluidkontakt, Zementbildung und Brachiopoden-Screening. Alle Modellannahmen bleiben editierbar.",
+      "tasks": [
+        {
+          "id": "176da5dc-11aa-451b-831a-61a3996d706c",
+          "title": "Wie viel Wasser für einen O-Reset?",
+          "module": "exchange",
+          "inputs": {
+            "target": "reset",
+            "scale": "VPDB",
+            "initial": "0",
+            "equilibrium": "-7.38",
+            "waterConcentration": "888000",
+            "rockConcentration": "480000",
+            "ratio": "1",
+            "reset": "0.5"
+          },
+          "status": "progress",
+          "text": "",
+          "notes": "Aufgabenspezifische Lehrdaten, kein universelles Naturmodell. Originaldokumente werden nicht hochgeladen.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.510Z",
+          "result": {
+            "module": "exchange",
+            "version": "2.0.0",
+            "values": {
+              "target": "reset",
+              "scale": "VPDB",
+              "initial": 0,
+              "equilibrium": -7.38,
+              "waterConcentration": 888000,
+              "rockConcentration": 480000,
+              "reset": 0.5
+            },
+            "formula": "N = −ln(1 − f)/k",
+            "outputs": [
+              {
+                "label": "Kumulatives Wasser/Gestein-Verhältnis N",
+                "value": 0.37467415165402446,
+                "unit": "kg / kg",
+                "key": "ratio"
+              },
+              {
+                "label": "Reset-Anteil f",
+                "value": 50,
+                "unit": "%",
+                "key": "reset"
+              },
+              {
+                "label": "Cw/Cr",
+                "value": 1.85,
+                "unit": "1",
+                "key": ""
+              },
+              {
+                "label": "Gesteinswert nach Fluidkontakt",
+                "value": -3.69,
+                "unit": "‰ VPDB",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Austauschkapazität",
+                "formula": "k = Cw/Cr",
+                "substitution": "888.000 / 480.000 = 1,85"
+              },
+              {
+                "label": "Offenes Austauschmodell",
+                "formula": "N = −ln(1 − f)/k",
+                "substitution": "N = 0,374674 kg/kg; δr = -3,69 ‰; f = 50 %"
+              }
+            ],
+            "warnings": [
+              "Vereinfachtes offenes Unterrichtsmodell mit gleichbleibender Fluidzusammensetzung, Temperatur und Austauschkapazität. δeq ist der Mineral-Endpunkt; alle drei δ-Werte müssen auf derselben Skala liegen. N ist kumulativer Durchsatz, keine Zeit und kein aktueller Porenwassergehalt."
+            ],
+            "interpretation": "50 % des modellierten Abstands zwischen Primärwert und Gleichgewicht sind zurückgesetzt.",
+            "tables": [],
+            "sources": [
+              {
+                "title": "Banner & Hanson (1990) · Water–rock interaction; vereinfachtes Unterrichtsmodell aus Assignment 3",
+                "url": "https://doi.org/10.1016/0016-7037(90)90128-8"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.510Z"
+          }
+        },
+        {
+          "id": "800eeca9-7cd2-493d-a1c8-38e78d3c658b",
+          "title": "Probe 1: Aus O das C-Signal vorhersagen",
+          "module": "exchangePair",
+          "inputs": {
+            "target": "oxygen",
+            "measured": "-7",
+            "initialO": "0",
+            "equilibriumO": "-7.38",
+            "initialC": "4",
+            "equilibriumC": "-10",
+            "waterO": "888000",
+            "rockO": "480000",
+            "waterC": "60.1",
+            "rockC": "120000"
+          },
+          "status": "progress",
+          "text": "",
+          "notes": "Aufgabenspezifische Lehrdaten, kein universelles Naturmodell. Originaldokumente werden nicht hochgeladen.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.510Z",
+          "result": {
+            "module": "exchangePair",
+            "version": "2.0.0",
+            "values": {
+              "target": "oxygen",
+              "measured": -7,
+              "initialO": 0,
+              "equilibriumO": -7.38,
+              "initialC": 4,
+              "equilibriumC": -10,
+              "waterO": 888000,
+              "rockO": 480000,
+              "waterC": 60.1,
+              "rockC": 120000
+            },
+            "formula": "δX = δeq,X + (δ₀,X − δeq,X) exp(−N kX), X = O oder C",
+            "outputs": [
+              {
+                "label": "Kumulatives Wasser/Gestein-Verhältnis N",
+                "value": 1.6034365756076143,
+                "unit": "kg / kg",
+                "key": "ratio"
+              },
+              {
+                "label": "Vorhergesagtes δ¹⁸O",
+                "value": -7,
+                "unit": "‰ VPDB",
+                "key": "oxygen"
+              },
+              {
+                "label": "Vorhergesagtes δ¹³C",
+                "value": 3.988761750278078,
+                "unit": "‰ VPDB",
+                "key": "carbon"
+              },
+              {
+                "label": "Reset Sauerstoff",
+                "value": 94.85094850948511,
+                "unit": "%",
+                "key": ""
+              },
+              {
+                "label": "Reset Kohlenstoff",
+                "value": 0.08027321229944269,
+                "unit": "%",
+                "key": ""
+              },
+              {
+                "label": "Verhältnis kO/kC",
+                "value": 3693.843594009983,
+                "unit": "1",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Beide Kapazitäten bestimmen",
+                "formula": "kO = Cw,O/Cr,O; kC = Cw,C/Cr,C",
+                "substitution": "kO = 1,85; kC = 0,000500833"
+              },
+              {
+                "label": "N aus dem gemessenen System",
+                "formula": "N = −ln[(δgemessen − δeq)/(δ₀ − δeq)]/k",
+                "substitution": "N = 1,60344 kg/kg"
+              },
+              {
+                "label": "Gleiches N im anderen System verwenden",
+                "formula": "δX = δeq,X + (δ₀,X − δeq,X) exp(−N kX), X = O oder C",
+                "substitution": "δ¹⁸O = -7 ‰; δ¹³C = 3,98876 ‰"
+              }
+            ],
+            "warnings": [
+              "Beide Systeme teilen denselben kumulativen Fluidkontakt, haben aber eigene Konzentrationsverhältnisse und Endpunkte. Gültig nur unter den vereinfachten konstanten Bedingungen des vorgegebenen Austauschmodells; keine universelle kinetische Altersbestimmung."
+            ],
+            "interpretation": "Erhaltung muss für jeden Proxy separat beurteilt werden. Ein weitgehend erhaltenes C-Signal garantiert kein primäres O-Signal.",
+            "tables": [],
+            "sources": [
+              {
+                "title": "Banner & Hanson (1990) · Water–rock interaction; vereinfachtes Unterrichtsmodell aus Assignment 3",
+                "url": "https://doi.org/10.1016/0016-7037(90)90128-8"
+              },
+              {
+                "title": "Marshall (1992) · Erhaltung von Carbonat-Isotopensignalen",
+                "url": "https://doi.org/10.1017/S0016756800008244"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.511Z"
+          }
+        },
+        {
+          "id": "bde31db3-68d6-4cb6-8b7b-394b855f9863",
+          "title": "Probe 2: Aus C das O-Signal vorhersagen",
+          "module": "exchangePair",
+          "inputs": {
+            "target": "carbon",
+            "measured": "1",
+            "initialO": "0",
+            "equilibriumO": "-7.38",
+            "initialC": "4",
+            "equilibriumC": "-10",
+            "waterO": "888000",
+            "rockO": "480000",
+            "waterC": "60.1",
+            "rockC": "120000"
+          },
+          "status": "progress",
+          "text": "",
+          "notes": "Aufgabenspezifische Lehrdaten, kein universelles Naturmodell. Originaldokumente werden nicht hochgeladen.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.510Z",
+          "result": {
+            "module": "exchangePair",
+            "version": "2.0.0",
+            "values": {
+              "target": "carbon",
+              "measured": 1,
+              "initialO": 0,
+              "equilibriumO": -7.38,
+              "initialC": 4,
+              "equilibriumC": -10,
+              "waterO": 888000,
+              "rockO": 480000,
+              "waterC": 60.1,
+              "rockC": 120000
+            },
+            "formula": "δX = δeq,X + (δ₀,X − δeq,X) exp(−N kX), X = O oder C",
+            "outputs": [
+              {
+                "label": "Kumulatives Wasser/Gestein-Verhältnis N",
+                "value": 481.5215776709912,
+                "unit": "kg / kg",
+                "key": "ratio"
+              },
+              {
+                "label": "Vorhergesagtes δ¹⁸O",
+                "value": -7.38,
+                "unit": "‰ VPDB",
+                "key": "oxygen"
+              },
+              {
+                "label": "Vorhergesagtes δ¹³C",
+                "value": 1,
+                "unit": "‰ VPDB",
+                "key": "carbon"
+              },
+              {
+                "label": "Reset Sauerstoff",
+                "value": 100,
+                "unit": "%",
+                "key": ""
+              },
+              {
+                "label": "Reset Kohlenstoff",
+                "value": 21.42857142857143,
+                "unit": "%",
+                "key": ""
+              },
+              {
+                "label": "Verhältnis kO/kC",
+                "value": 3693.843594009983,
+                "unit": "1",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Beide Kapazitäten bestimmen",
+                "formula": "kO = Cw,O/Cr,O; kC = Cw,C/Cr,C",
+                "substitution": "kO = 1,85; kC = 0,000500833"
+              },
+              {
+                "label": "N aus dem gemessenen System",
+                "formula": "N = −ln[(δgemessen − δeq)/(δ₀ − δeq)]/k",
+                "substitution": "N = 481,522 kg/kg"
+              },
+              {
+                "label": "Gleiches N im anderen System verwenden",
+                "formula": "δX = δeq,X + (δ₀,X − δeq,X) exp(−N kX), X = O oder C",
+                "substitution": "δ¹⁸O = -7,38 ‰; δ¹³C = 1 ‰"
+              }
+            ],
+            "warnings": [
+              "Beide Systeme teilen denselben kumulativen Fluidkontakt, haben aber eigene Konzentrationsverhältnisse und Endpunkte. Gültig nur unter den vereinfachten konstanten Bedingungen des vorgegebenen Austauschmodells; keine universelle kinetische Altersbestimmung."
+            ],
+            "interpretation": "Erhaltung muss für jeden Proxy separat beurteilt werden. Ein weitgehend erhaltenes C-Signal garantiert kein primäres O-Signal.",
+            "tables": [],
+            "sources": [
+              {
+                "title": "Banner & Hanson (1990) · Water–rock interaction; vereinfachtes Unterrichtsmodell aus Assignment 3",
+                "url": "https://doi.org/10.1016/0016-7037(90)90128-8"
+              },
+              {
+                "title": "Marshall (1992) · Erhaltung von Carbonat-Isotopensignalen",
+                "url": "https://doi.org/10.1017/S0016756800008244"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.511Z"
+          }
+        },
+        {
+          "id": "823c61bd-8528-4ede-bdb2-ed78f5c89ae8",
+          "title": "Drei Fluide und der Ölzutritt",
+          "module": "scenarios",
+          "inputs": {
+            "scaleC": "VPDB",
+            "convention": "current",
+            "calibration": "KO97",
+            "calcite": "-8",
+            "data": "name;water\nEisfreies Meerwasser;-1\nFormationswasser;2\nEntwickelte Beckensole;5",
+            "surface": "15",
+            "gradient": "30",
+            "oilDepth": "2"
+          },
+          "status": "progress",
+          "text": "",
+          "notes": "Aufgabenspezifische Lehrdaten, kein universelles Naturmodell. Originaldokumente werden nicht hochgeladen.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.510Z",
+          "result": {
+            "module": "scenarios",
+            "version": "2.0.0",
+            "values": {
+              "calcite": -8,
+              "scaleC": "VPDB",
+              "data": "name;water\nEisfreies Meerwasser;-1\nFormationswasser;2\nEntwickelte Beckensole;5",
+              "surface": 15,
+              "gradient": 30,
+              "oilDepth": 2,
+              "convention": "current",
+              "calibration": "KO97"
+            },
+            "formula": "Wasserhypothese → α → TK = 18030/(1000 ln α + 32,42) → z = (T − T₀)/G",
+            "outputs": [
+              {
+                "label": "Verglichene Wasser-Szenarien",
+                "value": 3,
+                "unit": "Anzahl",
+                "key": "count"
+              },
+              {
+                "label": "Kältestes Szenario",
+                "value": 49.737189022686096,
+                "unit": "°C",
+                "key": ""
+              },
+              {
+                "label": "Wärmstes Szenario",
+                "value": 88.52131203635486,
+                "unit": "°C",
+                "key": ""
+              },
+              {
+                "label": "Temperatur bei Ölzutritt im Modell",
+                "value": 75,
+                "unit": "°C",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Eisfreies Meerwasser",
+                "formula": "Wasserhypothese → α → TK = 18030/(1000 ln α + 32,42) → z = (T − T₀)/G",
+                "substitution": "δw = -1 ‰; T = 49,7372 °C; z = 1,15791 km; vor Ölzutritt"
+              },
+              {
+                "label": "Formationswasser",
+                "formula": "Wasserhypothese → α → TK = 18030/(1000 ln α + 32,42) → z = (T − T₀)/G",
+                "substitution": "δw = 2 ‰; T = 68,0595 °C; z = 1,76865 km; vor Ölzutritt"
+              },
+              {
+                "label": "Entwickelte Beckensole",
+                "formula": "Wasserhypothese → α → TK = 18030/(1000 ln α + 32,42) → z = (T − T₀)/G",
+                "substitution": "δw = 5 ‰; T = 88,5213 °C; z = 2,45071 km; nach Ölzutritt"
+              }
+            ],
+            "warnings": [
+              "Kim & O’Neil 1997, Originalkalibrierung: Calcit–Wasser-Gleichgewicht und passende Säurefraktionierungs-Konvention vorausgesetzt. Keine automatische Korrektur von Vital-/Kinetikeffekten.",
+              "Extrapolation außerhalb des experimentellen Bereichs 10–40 °C. Das ist bei Versenkungszementen eine Modellannahme, keine unabhängige Temperaturmessung.",
+              "Kein Szenario wird allein aus dem gewünschten Ergebnis als richtig ausgewählt. Vor/nach Ölzutritt ist eine bedingte Aussage im monotonen Versenkungsmodell. Negative Tiefen sind mit diesem Modell nicht vereinbar."
+            ],
+            "interpretation": "Eine Mineralmessung liefert je nach angenommener Porenlösung unterschiedliche Temperaturen und Reservoirgeschichten.",
+            "tables": [
+              {
+                "title": "Fluidhypothesen und Reservoirdeutung",
+                "headers": [
+                  "Wasser",
+                  "δw (‰ VSMOW)",
+                  "α",
+                  "1000 ln α (‰)",
+                  "T (°C)",
+                  "z (km)",
+                  "Zeitliche Deutung"
+                ],
+                "rows": [
+                  [
+                    "Eisfreies Meerwasser",
+                    -1,
+                    1.0236963363363363,
+                    23.419936092147676,
+                    49.737189022686096,
+                    1.1579063007562032,
+                    "vor Ölzutritt"
+                  ],
+                  [
+                    "Formationswasser",
+                    2,
+                    1.020631377245509,
+                    20.421433095891086,
+                    68.05951956925634,
+                    1.7686506523085446,
+                    "vor Ölzutritt"
+                  ],
+                  [
+                    "Entwickelte Beckensole",
+                    5,
+                    1.0175847164179104,
+                    17.43189424752507,
+                    88.52131203635486,
+                    2.4507104012118286,
+                    "nach Ölzutritt"
+                  ]
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "title": "Kim & O’Neil (1997) · Calcite–water fractionation, Originalkalibrierung",
+                "url": "https://doi.org/10.1016/S0016-7037(97)00169-5"
+              },
+              {
+                "title": "Camin et al. (2025) · IAEA scale definitions, Abschnitt 4.3",
+                "url": "https://doi.org/10.1002/rcm.10018"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.511Z"
+          }
+        },
+        {
+          "id": "221e158f-aa7d-4a3a-b8e6-6ef421ef7993",
+          "title": "Acht Brachiopoden: Screening und Bias",
+          "module": "screening",
+          "inputs": {
+            "srMin": "700",
+            "mnMax": "100",
+            "feMax": "300",
+            "convention": "current",
+            "calibration": "KO97",
+            "data": "id;fabric;cl;Sr;Mn;Fe;d18O;d13C\nB1;preserved fibres;non-luminescent;1150;45;120;-4.60;2.10\nB2;preserved fibres;non-luminescent;980;70;180;-4.90;1.90\nB3;preserved fibres;non-luminescent;1210;30;90;-4.40;2.00\nB4;recrystallised;bright orange;420;610;1450;-8.70;1.20\nB5;preserved fibres;non-luminescent;870;95;210;-5.00;2.10\nB6;recrystallised;dull;350;380;2600;-7.90;1.60\nB7;recrystallised;non-luminescent;1040;60;150;-6.30;2.00\nB8;partly preserved;patchy luminescence;610;210;380;-6.10;1.90",
+            "water": "-1"
+          },
+          "status": "progress",
+          "text": "",
+          "notes": "Aufgabenspezifische Lehrdaten, kein universelles Naturmodell. Originaldokumente werden nicht hochgeladen.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.510Z",
+          "result": {
+            "module": "screening",
+            "version": "2.0.0",
+            "values": {
+              "data": "id;fabric;cl;Sr;Mn;Fe;d18O;d13C\nB1;preserved fibres;non-luminescent;1150;45;120;-4.60;2.10\nB2;preserved fibres;non-luminescent;980;70;180;-4.90;1.90\nB3;preserved fibres;non-luminescent;1210;30;90;-4.40;2.00\nB4;recrystallised;bright orange;420;610;1450;-8.70;1.20\nB5;preserved fibres;non-luminescent;870;95;210;-5.00;2.10\nB6;recrystallised;dull;350;380;2600;-7.90;1.60\nB7;recrystallised;non-luminescent;1040;60;150;-6.30;2.00\nB8;partly preserved;patchy luminescence;610;210;380;-6.10;1.90",
+              "srMin": 700,
+              "mnMax": 100,
+              "feMax": 300,
+              "water": -1,
+              "convention": "current",
+              "calibration": "KO97"
+            },
+            "formula": "Behalten = Gefüge ∧ CL ∧ (Sr > Grenze) ∧ (Mn < Grenze) ∧ (Fe < Grenze)",
+            "outputs": [
+              {
+                "label": "Nach Screening behalten",
+                "value": 4,
+                "unit": "von 8",
+                "key": "retained"
+              },
+              {
+                "label": "Anzahl aller Proben",
+                "value": 8,
+                "unit": "Anzahl",
+                "key": ""
+              },
+              {
+                "label": "Mittel δ¹⁸O (alle)",
+                "value": -5.9875,
+                "unit": "‰ VPDB",
+                "key": ""
+              },
+              {
+                "label": "Mittel δ¹³C (alle)",
+                "value": 1.85,
+                "unit": "‰ VPDB",
+                "key": ""
+              },
+              {
+                "label": "Temperatur zum mittleren δ (alle)",
+                "value": 38.428641621731174,
+                "unit": "°C",
+                "key": "allTemperature"
+              },
+              {
+                "label": "Stichproben-s δ¹⁸O (alle)",
+                "value": 1.5914391510292094,
+                "unit": "‰ VPDB",
+                "key": ""
+              },
+              {
+                "label": "Pearson r δ¹⁸O/δ¹³C (alle)",
+                "value": 0.8989470144444068,
+                "unit": "1",
+                "key": ""
+              },
+              {
+                "label": "Mittel δ¹⁸O (gescreent)",
+                "value": -4.725,
+                "unit": "‰ VPDB",
+                "key": ""
+              },
+              {
+                "label": "Mittel δ¹³C (gescreent)",
+                "value": 2.025,
+                "unit": "‰ VPDB",
+                "key": ""
+              },
+              {
+                "label": "Temperatur zum mittleren δ (gescreent)",
+                "value": 31.740887699704274,
+                "unit": "°C",
+                "key": "screenedTemperature"
+              },
+              {
+                "label": "Stichproben-s δ¹⁸O (gescreent)",
+                "value": 0.27537852736430507,
+                "unit": "‰ VPDB",
+                "key": ""
+              },
+              {
+                "label": "Pearson r δ¹⁸O/δ¹³C (gescreent)",
+                "value": 0.031606977062051754,
+                "unit": "1",
+                "key": ""
+              },
+              {
+                "label": "Temperatur-Bias: alle − gescreent",
+                "value": 6.6877539220269,
+                "unit": "°C",
+                "key": "bias"
+              }
+            ],
+            "steps": [
+              {
+                "label": "Unabhängiges Screening anwenden",
+                "formula": "Behalten = Gefüge ∧ CL ∧ (Sr > Grenze) ∧ (Mn < Grenze) ∧ (Fe < Grenze)",
+                "substitution": "Behalten: B1, B2, B3, B5; verworfen: B4, B6, B7, B8"
+              },
+              {
+                "label": "Getrennte Mittelwerte und Streuungen",
+                "formula": "δ̄ = Σδ/n; s = √[Σ(δ − δ̄)²/(n − 1)]",
+                "substitution": "Ungewichtete Mittelwerte: alle 8, gescreent 4 Proben."
+              },
+              {
+                "label": "Korrelation beschreiben",
+                "formula": "r = Σ[(O − Ō)(C − C̄)]/√[Σ(O − Ō)² Σ(C − C̄)²]",
+                "substitution": "r alle = 0,898947; gescreent = 0,031607"
+              },
+              {
+                "label": "Temperatur-Bias bestimmen",
+                "formula": "ΔT = T(δ̄O,alle) − T(δ̄O,gescreent)",
+                "substitution": "ΔT = 6,68775 °C"
+              }
+            ],
+            "warnings": [
+              "Kim & O’Neil 1997, Originalkalibrierung: Calcit–Wasser-Gleichgewicht und passende Säurefraktionierungs-Konvention vorausgesetzt. Keine automatische Korrektur von Vital-/Kinetikeffekten.",
+              "Schwellenwerte sind aufgaben-/taxonspezifisch, keine universellen Erhaltungsgarantien. Mn kann CL aktivieren, Fe sie unterdrücken; unauffällige CL allein genügt nicht. Korrelation beweist weder meteorische Alteration noch primäre Erhaltung.",
+              "Berechnet wird T zum mittleren δ, nicht der Mittelwert einzeln rekonstruierter Temperaturen. Wasser-δ und Kalibrierung bleiben Annahmen; s ist eine Stichprobenstreuung, keine vollständige Messunsicherheit."
+            ],
+            "interpretation": "Die ungeprüfte Auswertung ist im gewählten Modell 6,68775 °C wärmer als die gescreente Auswertung.",
+            "tables": [
+              {
+                "title": "Einzelprüfung der Proben",
+                "headers": [
+                  "Probe",
+                  "Behalten",
+                  "Begründung",
+                  "Sr (ppm)",
+                  "Mn (ppm)",
+                  "Fe (ppm)",
+                  "δ¹⁸O (‰ VPDB)",
+                  "δ¹³C (‰ VPDB)"
+                ],
+                "rows": [
+                  [
+                    "B1",
+                    "ja",
+                    "Alle Kriterien erfüllt",
+                    1150,
+                    45,
+                    120,
+                    -4.6,
+                    2.1
+                  ],
+                  [
+                    "B2",
+                    "ja",
+                    "Alle Kriterien erfüllt",
+                    980,
+                    70,
+                    180,
+                    -4.9,
+                    1.9
+                  ],
+                  [
+                    "B3",
+                    "ja",
+                    "Alle Kriterien erfüllt",
+                    1210,
+                    30,
+                    90,
+                    -4.4,
+                    2
+                  ],
+                  [
+                    "B4",
+                    "nein",
+                    "Fasern nicht vollständig erhalten; CL-Kriterium nicht erfüllt; Sr ≤ 700 ppm; Mn ≥ 100 ppm; Fe ≥ 300 ppm",
+                    420,
+                    610,
+                    1450,
+                    -8.7,
+                    1.2
+                  ],
+                  [
+                    "B5",
+                    "ja",
+                    "Alle Kriterien erfüllt",
+                    870,
+                    95,
+                    210,
+                    -5,
+                    2.1
+                  ],
+                  [
+                    "B6",
+                    "nein",
+                    "Fasern nicht vollständig erhalten; CL-Kriterium nicht erfüllt; Sr ≤ 700 ppm; Mn ≥ 100 ppm; Fe ≥ 300 ppm",
+                    350,
+                    380,
+                    2600,
+                    -7.9,
+                    1.6
+                  ],
+                  [
+                    "B7",
+                    "nein",
+                    "Fasern nicht vollständig erhalten",
+                    1040,
+                    60,
+                    150,
+                    -6.3,
+                    2
+                  ],
+                  [
+                    "B8",
+                    "nein",
+                    "Fasern nicht vollständig erhalten; CL-Kriterium nicht erfüllt; Sr ≤ 700 ppm; Mn ≥ 100 ppm; Fe ≥ 300 ppm",
+                    610,
+                    210,
+                    380,
+                    -6.1,
+                    1.9
+                  ]
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "title": "Marshall (1992) · Erhaltung von Carbonat-Isotopensignalen",
+                "url": "https://doi.org/10.1017/S0016756800008244"
+              },
+              {
+                "title": "Machel (1985) · Cathodoluminescence in calcite and dolomite",
+                "url": "https://journals.lib.unb.ca/index.php/GC/article/view/3427"
+              },
+              {
+                "title": "Kim & O’Neil (1997) · Calcite–water fractionation, Originalkalibrierung",
+                "url": "https://doi.org/10.1016/S0016-7037(97)00169-5"
+              },
+              {
+                "title": "Camin et al. (2025) · IAEA scale definitions, Abschnitt 4.3",
+                "url": "https://doi.org/10.1002/rcm.10018"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.512Z"
+          }
+        }
+      ],
+      "createdAt": "2026-11-17T20:57:19.510Z",
+      "updatedAt": "2026-11-17T20:57:19.510Z"
+    }
+  ]
+}

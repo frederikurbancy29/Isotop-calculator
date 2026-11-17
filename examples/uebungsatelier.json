@@ -1,0 +1,595 @@
+{
+  "schema": "geochemical-isotope-calculator",
+  "schemaVersion": 1,
+  "engineVersion": "2.0.0",
+  "exportedAt": "2026-11-17T20:57:19.481Z",
+  "projects": [
+    {
+      "id": "e59c82fc-a4ad-4921-aded-418e28058cbc",
+      "name": "Isotopen · Übungsatelier",
+      "description": "Dokumentierte Beispiele zum Ausprobieren. Eigene Aufgaben mit „Neue Aufgabe“ anlegen.",
+      "tasks": [
+        {
+          "id": "8c89cfc3-4c5e-4403-a90f-d1a46cd1229a",
+          "title": "Eisvolumen & Abkühlung",
+          "module": "temperature",
+          "inputs": {
+            "observed": "1.66",
+            "ice": "1",
+            "sensitivity": "0.25",
+            "initialT": ""
+          },
+          "status": "open",
+          "text": "Calculate the deep-water cooling from a benthic δ¹⁸O increase of 1.66 ‰, assuming an ice-volume contribution of 1.0 ‰ and a sensitivity of 0.25 ‰ per °C cooling.",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "temperature",
+            "version": "2.0.0",
+            "values": {
+              "observed": 1.66,
+              "ice": 1,
+              "sensitivity": 0.25,
+              "initialT": null
+            },
+            "formula": "ΔT = −(Δδc − ΔδEis→c) / s",
+            "outputs": [
+              {
+                "label": "Temperaturänderung ΔT",
+                "value": -2.6399999999999997,
+                "unit": "°C",
+                "key": "change"
+              },
+              {
+                "label": "Temperaturbedingte Δδ¹⁸O",
+                "value": 0.6599999999999999,
+                "unit": "‰ VPDB",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Eisvolumenbeitrag abziehen",
+                "formula": "ΔδTemperatur = Δδc − ΔδEis→c",
+                "substitution": "1,66 − 1 = 0,66 ‰"
+              },
+              {
+                "label": "Temperaturänderung bestimmen",
+                "formula": "ΔT = −(Δδc − ΔδEis→c) / s",
+                "substitution": "−(0,66) / 0,25 = -2,64 °C"
+              }
+            ],
+            "warnings": [
+              "Lineares Differenzmodell mit vorgegebener Sensitivität, keine absolute Thermometerkalibrierung. Der Eisbeitrag muss bereits auf die Carbonat-Δ-Skala abgebildet sein. Eine Wasseränderung auf VSMOW darf nicht ungeprüft abgezogen werden."
+            ],
+            "interpretation": "2,64 °C Abkühlung.",
+            "sources": [
+              {
+                "title": "Kendall & Caldwell (1998) · Fundamentals of Isotope Geochemistry, USGS",
+                "url": "https://wwwrcamnl.wr.usgs.gov/isoig/isopubs/itchch2.html"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.508Z"
+          }
+        },
+        {
+          "id": "b3309c76-8b81-4233-a42c-85cd281103f5",
+          "title": "Zwei Kohlenstoffquellen",
+          "module": "mixing",
+          "inputs": {
+            "target": "mix",
+            "weighting": "element",
+            "a": "-25",
+            "b": "-5",
+            "fraction": "0.3"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "mixing",
+            "version": "2.0.0",
+            "values": {
+              "target": "mix",
+              "weighting": "element",
+              "a": -25,
+              "b": -5,
+              "fraction": 0.3
+            },
+            "formula": "δmix ≈ wA · δA + (1 − wA) · δB",
+            "outputs": [
+              {
+                "label": "δ¹³C Mischung",
+                "value": -11,
+                "unit": "‰ VPDB",
+                "key": "mix"
+              }
+            ],
+            "steps": [
+              {
+                "label": "Endglieder gewichten",
+                "formula": "δmix ≈ wA · δA + (1 − wA) · δB",
+                "substitution": "0,3 · (-25) + 0,7 · (-5) = -11 ‰"
+              }
+            ],
+            "warnings": [
+              "Lineare δ-Massenbilanz: exakt für Anteile des leichten Isotops, Näherung für Gesamt-C-Anteile. Für natürliche δ¹³C-Werte üblich; nicht für stark angereicherte Tracer. Alle δ¹³C-Werte auf VPDB."
+            ],
+            "interpretation": "Endglied A trägt 30 % zum Kohlenstoff bei. Konzentrationen und Materialanteile müssen dieselbe Massen- oder Volumenbasis verwenden.",
+            "sources": [
+              {
+                "title": "USGS WSP 2497 · Isotopic Mass Balance, Gleichungen 2–3",
+                "url": "https://pubs.usgs.gov/wsp/wsp2497/pdf/wsp2497.pdf"
+              },
+              {
+                "title": "Kendall & Caldwell (1998) · Fundamentals of Isotope Geochemistry, USGS",
+                "url": "https://wwwrcamnl.wr.usgs.gov/isoig/isopubs/itchch2.html"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.508Z"
+          }
+        },
+        {
+          "id": "50ff2b86-a513-495c-908d-2659eecec7af",
+          "title": "Fraktionierungsfaktor A/B",
+          "module": "fractionation",
+          "inputs": {
+            "mode": "deltas",
+            "isotope": "C13",
+            "scaleA": "VPDB",
+            "scaleB": "VPDB",
+            "convention": "current",
+            "a": "-5",
+            "b": "-25"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "fractionation",
+            "version": "2.0.0",
+            "values": {
+              "mode": "deltas",
+              "isotope": "C13",
+              "a": -5,
+              "b": -25,
+              "convention": "current"
+            },
+            "formula": "αA/B = RA / RB = (1000 + δA) / (1000 + δB)",
+            "outputs": [
+              {
+                "label": "Fraktionierungsfaktor αA/B",
+                "value": 1.0205128205128204,
+                "unit": "1",
+                "key": "alpha"
+              },
+              {
+                "label": "ΔA−B = δA − δB (VPDB)",
+                "value": 20,
+                "unit": "‰",
+                "key": ""
+              },
+              {
+                "label": "εA/B = 1000 (α − 1)",
+                "value": 20.51282051282044,
+                "unit": "‰",
+                "key": "epsilon"
+              },
+              {
+                "label": "1000 ln αA/B",
+                "value": 20.305266160745525,
+                "unit": "‰",
+                "key": "log"
+              }
+            ],
+            "steps": [
+              {
+                "label": "Verhältnisse dividieren",
+                "formula": "αA/B = RA / RB = (1000 + δA) / (1000 + δB)",
+                "substitution": "(995) / (975) = 1,020512821"
+              },
+              {
+                "label": "Anreicherungsfaktoren",
+                "formula": "ε = 1000 (α − 1); εln = 1000 ln α",
+                "substitution": "ε = 20,5128 ‰; εln = 20,3053 ‰"
+              }
+            ],
+            "warnings": [
+              "ε, 1000 ln α und Δ sind verschiedene Größen. Ihre Gleichsetzung ist nur eine Näherung bei kleinen Fraktionierungen und passenden δ-Werten."
+            ],
+            "interpretation": "A ist gegenüber B am schweren Isotop angereichert (αA/B > 1).",
+            "sources": [
+              {
+                "title": "Kendall & Caldwell (1998) · Fundamentals of Isotope Geochemistry, USGS",
+                "url": "https://wwwrcamnl.wr.usgs.gov/isoig/isopubs/itchch2.html"
+              },
+              {
+                "title": "Camin et al. (2025) · IAEA scale definitions, Abschnitt 4.3",
+                "url": "https://doi.org/10.1002/rcm.10018"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.508Z"
+          }
+        },
+        {
+          "id": "ffdc0f69-d96e-447c-84b6-20113aa60821",
+          "title": "Eis aus dem Ozean",
+          "module": "ice",
+          "inputs": {
+            "initial": "0",
+            "final": "1",
+            "iceDelta": "-40",
+            "mass": "1.4e21"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "ice",
+            "version": "2.0.0",
+            "values": {
+              "initial": 0,
+              "final": 1,
+              "iceDelta": -40,
+              "mass": 1.4e+21
+            },
+            "formula": "fEis = (δOzean,1 − δOzean,0) / (δOzean,1 − δEis)",
+            "outputs": [
+              {
+                "label": "Abgetrennter Eisanteil",
+                "value": 2.4390243902439024,
+                "unit": "%",
+                "key": "percent"
+              },
+              {
+                "label": "fEis der Anfangsmasse",
+                "value": 0.024390243902439025,
+                "unit": "1",
+                "key": ""
+              },
+              {
+                "label": "Eismasse",
+                "value": 34146341463414637000,
+                "unit": "kg",
+                "key": ""
+              },
+              {
+                "label": "Verbleibende Ozeanmasse",
+                "value": 1.3658536585365855e+21,
+                "unit": "kg",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Bilanz ansetzen",
+                "formula": "M₀ δ₀ ≈ (M₀ − MEis) δ₁ + MEis δEis",
+                "substitution": "fEis = MEis / M₀"
+              },
+              {
+                "label": "Nach Eisanteil auflösen",
+                "formula": "fEis = (δOzean,1 − δOzean,0) / (δOzean,1 − δEis)",
+                "substitution": "(1 − 0) / (1 − (-40)) = 0,0243902"
+              },
+              {
+                "label": "Masse bestimmen",
+                "formula": "MEis = fEis M₀",
+                "substitution": "0,0243902 · 1.400.000.000.000.000.000.000 = 34.146.300.000.000.000.000 kg"
+              }
+            ],
+            "warnings": [
+              "Lineare δ-Massenbilanz in einem geschlossenen Zweireservoir-System; Eis-δ ist der Mittelwert des gesamten abgetrennten Eises, kein momentaner Gefrierwert. Näherung für Gesamtwassermassen. Keine Rayleigh-Gefriergeschichte."
+            ],
+            "interpretation": "2,43902 % der Anfangswassermasse werden im Eisspeicher gebunden.",
+            "sources": [
+              {
+                "title": "USGS WSP 2497 · Isotopic Mass Balance, Gleichungen 2–3",
+                "url": "https://pubs.usgs.gov/wsp/wsp2497/pdf/wsp2497.pdf"
+              },
+              {
+                "title": "Kendall & Caldwell (1998) · Fundamentals of Isotope Geochemistry, USGS",
+                "url": "https://wwwrcamnl.wr.usgs.gov/isoig/isopubs/itchch2.html"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.509Z"
+          }
+        },
+        {
+          "id": "0f4599a7-7d5f-4da9-9c79-f9112133b743",
+          "title": "Landeis & Meeresspiegel",
+          "module": "sea",
+          "inputs": {
+            "mode": "volume",
+            "process": "melting",
+            "volume": "1000000",
+            "rhoIce": "917",
+            "rhoWater": "1000",
+            "area": "361000000"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "sea",
+            "version": "2.0.0",
+            "values": {
+              "mode": "volume",
+              "process": "melting",
+              "volume": 1000000,
+              "rhoIce": 917,
+              "rhoWater": 1000,
+              "area": 361000000
+            },
+            "formula": "Δh(m) = ± VEis(km³) · (ρEis/ρWasser) / AOzean(km²) · 1000",
+            "outputs": [
+              {
+                "label": "Meeresspiegeländerung Δh",
+                "value": 2.5401662049861495,
+                "unit": "m",
+                "key": "seaLevel"
+              },
+              {
+                "label": "Wasseräquivalent",
+                "value": 917000,
+                "unit": "km³",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Wasseräquivalent",
+                "formula": "VWasser = VEis · ρEis / ρWasser",
+                "substitution": "1.000.000 · 917/1.000 = 917.000 km³"
+              },
+              {
+                "label": "Auf Ozeanfläche verteilen",
+                "formula": "Δh(m) = ± VEis(km³) · (ρEis/ρWasser) / AOzean(km²) · 1000",
+                "substitution": "Δh = 2,54017 m"
+              }
+            ],
+            "warnings": [
+              "Nur landgebundenes Eis. Konstante Ozeanfläche, keine lokale Isostasie, Gravitation, thermische Ausdehnung oder Änderung von Ozeanbecken. Gewählte Dichte definiert das Wasseräquivalent."
+            ],
+            "interpretation": "2,54017 m Anstieg des globalen Meeresspiegeläquivalents.",
+            "sources": [
+              {
+                "title": "USGS WSP 2497 · Isotopic Mass Balance, Gleichungen 2–3",
+                "url": "https://pubs.usgs.gov/wsp/wsp2497/pdf/wsp2497.pdf"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.509Z"
+          }
+        },
+        {
+          "id": "4f6fd156-106b-4f65-83aa-b08a9e1659d3",
+          "title": "Ein offenes Reservoir",
+          "module": "rayleigh",
+          "inputs": {
+            "system": "O18",
+            "initial": "0",
+            "alpha": "1.01",
+            "remaining": "0.5"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "rayleigh",
+            "version": "2.0.0",
+            "values": {
+              "system": "O18",
+              "initial": 0,
+              "alpha": 1.01,
+              "remaining": 0.5
+            },
+            "formula": "δRest = (δ₀ + 1000) F^(αProdukt/Rest − 1) − 1000",
+            "outputs": [
+              {
+                "label": "δ Restreservoir",
+                "value": -6.907504562964073,
+                "unit": "‰ VSMOW",
+                "key": "residual"
+              },
+              {
+                "label": "δ Produkt, momentan",
+                "value": 3.0234203914063507,
+                "unit": "‰ VSMOW",
+                "key": ""
+              },
+              {
+                "label": "δ Produkt, kumulativ",
+                "value": 6.907504562964073,
+                "unit": "‰ VSMOW",
+                "key": ""
+              }
+            ],
+            "steps": [
+              {
+                "label": "Restreservoir",
+                "formula": "δRest = (δ₀ + 1000) F^(αProdukt/Rest − 1) − 1000",
+                "substitution": "(0 + 1000) · 0,5^(1,01 − 1) − 1000 = -6,9075 ‰"
+              },
+              {
+                "label": "Momentan entferntes Produkt",
+                "formula": "δProdukt,inst = α (δRest + 1000) − 1000",
+                "substitution": "δProdukt,inst = 3,02342 ‰"
+              },
+              {
+                "label": "Kumulatives Produkt",
+                "formula": "δProdukt,kum = (δ₀ + 1000)(1 − F^α)/(1 − F) − 1000",
+                "substitution": "δProdukt,kum = 6,9075 ‰"
+              }
+            ],
+            "warnings": [
+              "Offenes Rayleigh-Modell: homogenes Restreservoir, sofortige irreversible Produktabtrennung, konstantes αProdukt/Rest. F ist streng der verbleibende Anteil des leichten Isotops; als Gesamtstoffanteil ist dies eine Näherung für natürliche Isotopenhäufigkeiten."
+            ],
+            "interpretation": "Das entfernte Produkt ist gegenüber dem jeweiligen Rest angereichert; das Restreservoir wird leichter.",
+            "sources": [
+              {
+                "title": "Kendall & Caldwell (1998) · Fundamentals of Isotope Geochemistry, USGS",
+                "url": "https://wwwrcamnl.wr.usgs.gov/isoig/isopubs/itchch2.html"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.509Z"
+          }
+        },
+        {
+          "id": "dccf5442-aada-4ba2-ae2c-0c3e742a4cee",
+          "title": "Zwei Sauerstoffskalen",
+          "module": "standards",
+          "inputs": {
+            "isotope": "O18",
+            "from": "VPDB",
+            "convention": "current",
+            "delta": "-2"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "standards",
+            "version": "2.0.0",
+            "values": {
+              "isotope": "O18",
+              "delta": -2,
+              "from": "VPDB",
+              "convention": "current"
+            },
+            "formula": "δVSMOW = 1.03092 · δVPDB + 30.92",
+            "outputs": [
+              {
+                "label": "δ¹⁸O auf Zielskala",
+                "value": 28.85816,
+                "unit": "‰ VSMOW",
+                "key": "converted"
+              }
+            ],
+            "steps": [
+              {
+                "label": "Gewählte Skalenrelation",
+                "formula": "δVSMOW = 1.03092 · δVPDB + 30.92",
+                "substitution": "-2 ‰ VPDB → 28,85816 ‰ VSMOW"
+              }
+            ],
+            "warnings": [
+              "Dies ist eine Umrechnung des Standards, keine Calcit–Wasser-Fraktionierung und keine CO₂-Säureaufschluss-Korrektur. Die Rückumrechnung verwendet die algebraisch exakte Inverse derselben Relation."
+            ],
+            "interpretation": "Dasselbe Material, andere Referenzskala. Konvention: Camin et al. 2025.",
+            "sources": [
+              {
+                "title": "Camin et al. (2025) · IAEA scale definitions, Abschnitt 4.3",
+                "url": "https://doi.org/10.1002/rcm.10018"
+              },
+              {
+                "title": "Clark & Fritz (1997) · Environmental Isotopes in Hydrogeology, Skalenkonversion",
+                "url": "https://doi.org/10.1201/9781482242911"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.509Z"
+          }
+        },
+        {
+          "id": "12c00b9b-f2df-4634-93f4-e55db52ad571",
+          "title": "Calcit im Gleichgewicht",
+          "module": "thermometer",
+          "inputs": {
+            "scaleC": "VPDB",
+            "scaleW": "VSMOW",
+            "convention": "current",
+            "calibration": "KO97",
+            "target": "temperature",
+            "calcite": "-2",
+            "water": "0"
+          },
+          "status": "open",
+          "text": "",
+          "notes": "Beispielaufgabe; keine Original-Assignment-Datei.",
+          "calculated": true,
+          "updatedAt": "2026-11-17T20:57:19.479Z",
+          "result": {
+            "module": "thermometer",
+            "version": "2.0.0",
+            "values": {
+              "target": "temperature",
+              "calcite": -2,
+              "scaleC": "VPDB",
+              "water": 0,
+              "scaleW": "VSMOW",
+              "convention": "current",
+              "calibration": "KO97"
+            },
+            "formula": "TK = 18030 / (1000 ln α + 32,42)",
+            "outputs": [
+              {
+                "label": "Rekonstruierte Temperatur",
+                "value": 23.05695031023265,
+                "unit": "°C",
+                "key": "temperature"
+              },
+              {
+                "label": "Absolute Temperatur",
+                "value": 296.2069503102326,
+                "unit": "K",
+                "key": ""
+              },
+              {
+                "label": "αCalcit/Wasser",
+                "value": 1.02885816,
+                "unit": "1",
+                "key": "alpha"
+              }
+            ],
+            "steps": [
+              {
+                "label": "Skalen angleichen",
+                "formula": "Beide δ-Werte → VSMOW–SLAP",
+                "substitution": "δc = 28,8582 ‰; δw = 0 ‰"
+              },
+              {
+                "label": "Fraktionierung berechnen",
+                "formula": "α = (1000 + δc)/(1000 + δw)",
+                "substitution": "α = 1,02885816; 1000 ln α = 28,4496 ‰"
+              },
+              {
+                "label": "Nach Temperatur auflösen",
+                "formula": "TK = 18030 / (1000 ln α + 32,42)",
+                "substitution": "T = 296,207 K = 23,057 °C"
+              }
+            ],
+            "warnings": [
+              "Kim & O’Neil 1997, Originalkalibrierung: Calcit–Wasser-Gleichgewicht und passende Säurefraktionierungs-Konvention vorausgesetzt. Keine automatische Korrektur von Vital-/Kinetikeffekten."
+            ],
+            "interpretation": "Gleichgewicht nach der bestätigten Calcit–Wasser-Kalibrierung. Eine Skalenumrechnung ersetzt keine physikalische Fraktionierung.",
+            "tables": [],
+            "sources": [
+              {
+                "title": "Kim & O’Neil (1997) · Calcite–water fractionation, Originalkalibrierung",
+                "url": "https://doi.org/10.1016/S0016-7037(97)00169-5"
+              },
+              {
+                "title": "Camin et al. (2025) · IAEA scale definitions, Abschnitt 4.3",
+                "url": "https://doi.org/10.1002/rcm.10018"
+              }
+            ],
+            "calculatedAt": "2026-11-17T20:57:19.509Z"
+          }
+        }
+      ],
+      "createdAt": "2026-11-17T20:57:19.473Z",
+      "updatedAt": "2026-11-17T20:57:19.479Z"
+    }
+  ]
+}
